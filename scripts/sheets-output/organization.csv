@@ -1,0 +1,10 @@
+id,name,position,period,image_url,level,created_at,updated_at
+1,Bapak Suharto,Kepala Desa,2019-2025,"/placeholder.svg?height=150&width=150",kepala_desa,2024-01-01,2024-01-01
+2,Ibu Siti Aminah,Sekretaris Desa,2020-2026,"/placeholder.svg?height=150&width=150",sekretaris,2024-01-01,2024-01-01
+3,Bapak Ahmad Wijaya,Kepala Urusan Pemerintahan,2020-2026,"/placeholder.svg?height=150&width=150",kaur,2024-01-01,2024-01-01
+4,Bapak Bambang Sutrisno,Kepala Urusan Pembangunan,2020-2026,"/placeholder.svg?height=150&width=150",kaur,2024-01-01,2024-01-01
+5,Ibu Dewi Sartika,Kepala Urusan Kesejahteraan,2020-2026,"/placeholder.svg?height=150&width=150",kaur,2024-01-01,2024-01-01
+6,Bapak Eko Prasetyo,Kepala Urusan Keuangan,2020-2026,"/placeholder.svg?height=150&width=150",kaur,2024-01-01,2024-01-01
+7,Bapak Subagyo,Ketua RW 01,2021-2026,"/placeholder.svg?height=150&width=150",rw,2024-01-01,2024-01-01
+8,Bapak Hermawan,Ketua RW 02,2021-2026,"/placeholder.svg?height=150&width=150",rw,2024-01-01,2024-01-01
+9,Bapak Sujono,Ketua RW 03,2021-2026,"/placeholder.svg?height=150&width=150",rw,2024-01-01,2024-01-01 

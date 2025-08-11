@@ -1,0 +1,7 @@
+id,name,category,description,location,contact,image_url,created_at,updated_at
+1,Balai Desa,Pemerintahan,"Pusat pemerintahan dan pelayanan administrasi warga. Dilengkapi dengan aula serbaguna untuk berbagai kegiatan masyarakat.","Jl. Raya Desa No. 1","(0274) 123-4567","/placeholder.svg?height=300&width=400",2024-01-01,2024-01-01
+2,Sekolah Dasar Negeri,Pendidikan,"Menyediakan pendidikan dasar berkualitas bagi anak-anak dusun. Memiliki 6 ruang kelas, perpustakaan, dan lapangan olahraga.","Jl. Pendidikan No. 10","(0274) 123-4568","/placeholder.svg?height=300&width=400",2024-01-01,2024-01-01
+3,Puskesmas Pembantu,Kesehatan,"Memberikan layanan kesehatan primer, termasuk pemeriksaan umum, KIA, dan apotek kecil untuk warga.","Jl. Sehat No. 3","(0274) 123-4569","/placeholder.svg?height=300&width=400",2024-01-01,2024-01-01
+4,Masjid Jami',Keagamaan,"Tempat ibadah utama bagi warga muslim, sekaligus pusat kegiatan keagamaan dan sosial.","Jl. Masjid No. 5","(0274) 123-4570","/placeholder.svg?height=300&width=400",2024-01-01,2024-01-01
+5,Pasar Desa,Ekonomi,"Pusat kegiatan ekonomi tempat warga menjual hasil bumi dan kebutuhan sehari-hari. Beroperasi setiap pagi.","Jl. Pasar No. 7","(0274) 123-4571","/placeholder.svg?height=300&width=400",2024-01-01,2024-01-01
+6,Halte Transportasi Umum,Transportasi,"Memudahkan akses warga menuju pusat kota dengan layanan angkutan desa yang terjadwal.","Jl. Raya Utama","(0274) 123-4572","/placeholder.svg?height=300&width=400",2024-01-01,2024-01-01 
