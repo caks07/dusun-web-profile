@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button"
 import { Building, MapPin, GraduationCap, Heart, ArrowRight } from "lucide-react"
 
 const facilities = [
-  { name: "Balai Desa", icon: Building, color: "bg-green-100 text-green-600" },
-  { name: "Sekolah Dasar", icon: GraduationCap, color: "bg-blue-100 text-blue-600" },
-  { name: "Puskesmas", icon: Heart, color: "bg-red-100 text-red-600" },
+  { name: "Gedung Serba Guna", icon: Building, color: "bg-green-100 text-green-600" },
+  { name: "Paud", icon: GraduationCap, color: "bg-blue-100 text-blue-600" },
+  { name: "Bank Sampah", icon: Heart, color: "bg-red-100 text-red-600" },
   { name: "Masjid Jami'", icon: MapPin, color: "bg-purple-100 text-purple-600" },
 ]
 
@@ -16,7 +16,7 @@ export default function PublicFacilities() {
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold text-gray-800 mb-4">Fasilitas Umum</h2>
         <div className="w-24 h-1 bg-green-600 mx-auto mb-6"></div>
-        <p className="text-gray-600">Berbagai fasilitas untuk mendukung kehidupan masyarakat desa.</p>
+        <p className="text-gray-600">Berbagai fasilitas untuk mendukung kehidupan masyarakat Dusun Pogung Lor.</p>
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

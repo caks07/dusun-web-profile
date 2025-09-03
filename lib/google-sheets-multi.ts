@@ -41,6 +41,7 @@ export interface NewsData {
   updated_at: string
 }
 
+// PERUBAHAN DI SINI: Menambahkan wa_link dan insta_link
 export interface ProductData {
   id: string
   name: string
@@ -55,10 +56,10 @@ export interface ProductData {
   images: string
   rating: string
   in_stock: string
+  waLink?: string;
+  instaLink?: string;
   created_at: string
   updated_at: string
-  waLink?: string;
-  instaLink?: string
 }
 
 export interface RegulationData {
@@ -66,12 +67,6 @@ export interface RegulationData {
   title: string
   description: string
   category: string
-  file_url: string
-  views: string
-  status: string
-  published_at: string
-  created_at: string
-  updated_at: string
 }
 
 export interface AchievementData {
@@ -80,10 +75,6 @@ export interface AchievementData {
   year: string
   category: string
   description: string
-  details: string
-  image_url: string
-  created_at: string
-  updated_at: string
 }
 
 export interface GalleryData {
@@ -138,19 +129,20 @@ export async function fetchGoogleSheetData(sheetUrl: string): Promise<SheetData[
 
     const csvText = await response.text()
 
-    // Parse CSV data
-    const lines = csvText.split("\n")
+    // Split baris dengan hati-hati (menghapus \r untuk konsistensi)
+    const lines = csvText.replace(/\r/g, "").split("\n")
     if (lines.length < 2) {
       return []
     }
 
-    const headers = lines[0].split(",").map((header) => header.trim().replace(/"/g, ""))
+    // Parse header
+    const headers = parseCsvLine(lines[0])
 
     const data: SheetData[] = []
 
     for (let i = 1; i < lines.length; i++) {
       if (lines[i].trim()) {
-        const values = lines[i].split(",").map((value) => value.trim().replace(/"/g, ""))
+        const values = parseCsvLine(lines[i])
         const row: SheetData = {}
 
         headers.forEach((header, index) => {
@@ -168,7 +160,34 @@ export async function fetchGoogleSheetData(sheetUrl: string): Promise<SheetData[
   }
 }
 
-// Base URL untuk Google Sheets (akan diambil dari environment variable)
+// Fungsi bantu: parsing 1 baris CSV dengan memperhatikan tanda kutip
+function parseCsvLine(line: string): string[] {
+  const result: string[] = []
+  let current = ""
+  let inQuotes = false
+
+  for (let i = 0; i < line.length; i++) {
+    const char = line[i]
+
+    if (char === '"' && line[i + 1] === '"') {
+      // Handle escaped quotes ("")
+      current += '"'
+      i++
+    } else if (char === '"') {
+      inQuotes = !inQuotes
+    } else if (char === ',' && !inQuotes) {
+      result.push(current.trim())
+      current = ""
+    } else {
+      current += char
+    }
+  }
+
+  result.push(current.trim())
+  return result
+}
+
+
 const getBaseSheetUrl = () => {
   const url = process.env.GOOGLE_SHEETS_URL || "https://docs.google.com/spreadsheets/d/e/2PACX-1vTT_0cTh3xAJiasib7ZqWayHLAtHgtud6Gi7EY6AUBonEDCIa0QhhK7nZL3AE-GfqIN3y4exSICswgz"
 
@@ -186,7 +205,6 @@ export async function fetchSliderData(): Promise<SliderData[]> {
   const baseUrl = getBaseSheetUrl()
   if (!baseUrl) return []
 
-  // GID untuk sheet slider_data (biasanya 0 untuk sheet pertama)
   const sheetUrl = `${baseUrl}/pub?gid=1928961272&output=csv`
   const data = await fetchGoogleSheetData(sheetUrl)
   return data as unknown as SliderData[]
@@ -196,7 +214,6 @@ export async function fetchVillageInfo(): Promise<VillageInfo[]> {
   const baseUrl = getBaseSheetUrl()
   if (!baseUrl) return []
 
-  // GID untuk sheet village_info (biasanya 1 untuk sheet kedua)
   const sheetUrl = `${baseUrl}/pub?gid=1870188097&output=csv`
   const data = await fetchGoogleSheetData(sheetUrl)
   return data as unknown as VillageInfo[]
@@ -206,7 +223,6 @@ export async function fetchNewsData(): Promise<NewsData[]> {
   const baseUrl = getBaseSheetUrl()
   if (!baseUrl) return []
 
-  // GID untuk sheet news (biasanya 2 untuk sheet ketiga)
   const sheetUrl = `${baseUrl}/pub?gid=342987483&output=csv`
   const data = await fetchGoogleSheetData(sheetUrl)
   return data as unknown as NewsData[]
@@ -216,7 +232,6 @@ export async function fetchProductData(): Promise<ProductData[]> {
   const baseUrl = getBaseSheetUrl()
   if (!baseUrl) return []
 
-  // GID untuk sheet products (biasanya 3 untuk sheet keempat)
   const sheetUrl = `${baseUrl}/pub?gid=2112875458&output=csv`
   const data = await fetchGoogleSheetData(sheetUrl)
   return data as unknown as ProductData[]
@@ -226,7 +241,6 @@ export async function fetchRegulationData(): Promise<RegulationData[]> {
   const baseUrl = getBaseSheetUrl()
   if (!baseUrl) return []
 
-  // GID untuk sheet regulations (biasanya 4 untuk sheet kelima)
   const sheetUrl = `${baseUrl}/pub?gid=1983369763&output=csv`
   const data = await fetchGoogleSheetData(sheetUrl)
   return data as unknown as RegulationData[]
@@ -236,7 +250,6 @@ export async function fetchAchievementData(): Promise<AchievementData[]> {
   const baseUrl = getBaseSheetUrl()
   if (!baseUrl) return []
 
-  // GID untuk sheet achievements (biasanya 5 untuk sheet keenam)
   const sheetUrl = `${baseUrl}/pub?gid=1784903752&output=csv`
   const data = await fetchGoogleSheetData(sheetUrl)
   return data as unknown as AchievementData[]
@@ -246,7 +259,6 @@ export async function fetchGalleryData(): Promise<GalleryData[]> {
   const baseUrl = getBaseSheetUrl()
   if (!baseUrl) return []
 
-  // GID untuk sheet gallery (biasanya 6 untuk sheet ketujuh)
   const sheetUrl = `${baseUrl}/pub?gid=2040637510&output=csv`
   const data = await fetchGoogleSheetData(sheetUrl)
   return data as unknown as GalleryData[]
@@ -256,7 +268,6 @@ export async function fetchFacilityData(): Promise<FacilityData[]> {
   const baseUrl = getBaseSheetUrl()
   if (!baseUrl) return []
 
-  // GID untuk sheet facilities (biasanya 7 untuk sheet kedelapan)
   const sheetUrl = `${baseUrl}/pub?gid=403760298&output=csv`
   const data = await fetchGoogleSheetData(sheetUrl)
   return data as unknown as FacilityData[]
@@ -266,7 +277,6 @@ export async function fetchHistoryData(): Promise<HistoryData[]> {
   const baseUrl = getBaseSheetUrl()
   if (!baseUrl) return []
 
-  // GID untuk sheet history (biasanya 8 untuk sheet kesembilan)
   const sheetUrl = `${baseUrl}/pub?gid=1809878679&output=csv`
   const data = await fetchGoogleSheetData(sheetUrl)
   return data as unknown as HistoryData[]
@@ -276,7 +286,6 @@ export async function fetchOrganizationData(): Promise<OrganizationData[]> {
   const baseUrl = getBaseSheetUrl()
   if (!baseUrl) return []
 
-  // GID untuk sheet organization (biasanya 9 untuk sheet kesepuluh)
   const sheetUrl = `${baseUrl}/pub?gid=1277796981&output=csv`
   const data = await fetchGoogleSheetData(sheetUrl)
   return data as unknown as OrganizationData[]
@@ -309,36 +318,14 @@ export function transformVillageInfo(data: VillageInfo[]) {
   }
 }
 
-// Helper untuk konversi Google Drive share link/ID ke direct link
+// PERUBAHAN DI SINI: Mengubah fungsi agar menghasilkan URL untuk iframe
 export function getDirectGoogleDriveUrl(urlOrId: string) {
   if (!urlOrId) return urlOrId;
-
-  // 1) Already a preview URL?
-  if (
-    urlOrId.startsWith("https://drive.google.com/file/d/") &&
-    urlOrId.includes("/preview")
-  ) {
-    return urlOrId;
+  const fileIdRegex = /[a-zA-Z0-9_-]{33}/; // Regex untuk ID Google Drive yang lebih akurat
+  const match = urlOrId.match(fileIdRegex);
+  if (match && match[0]) {
+    return `https://drive.google.com/file/d/${match[0]}/preview`;
   }
-
-  // 2) Raw ID only
-  if (/^[a-zA-Z0-9_-]{20,}$/.test(urlOrId)) {
-    return `https://drive.google.com/file/d/${urlOrId}/preview`;
-  }
-
-  // 3) uc?export=view&id=<ID>
-  let m = urlOrId.match(/[?&]id=([a-zA-Z0-9_-]{20,})/);
-  if (m) {
-    return `https://drive.google.com/file/d/${m[1]}/preview`;
-  }
-
-  // 4) /file/d/<ID>/view?... or /d/<ID>/ (any trailing path)
-  m = urlOrId.match(/\/file\/d\/([a-zA-Z0-9_-]{20,})(?:\/\w+)?/);
-  if (m) {
-    return `https://drive.google.com/file/d/${m[1]}/preview`;
-  }
-
-  // fallback
   return urlOrId;
 }
 
@@ -359,6 +346,7 @@ export function transformNewsData(data: NewsData[]) {
     }))
 }
 
+// PERUBAHAN DI SINI: Menyesuaikan fungsi transformProductData
 export function transformProductData(data: ProductData[]) {
   return data
     .filter(item => item.in_stock?.toLowerCase() === "true")
@@ -366,33 +354,27 @@ export function transformProductData(data: ProductData[]) {
       id: item.id,
       name: item.name,
       description: item.description,
-      price: parseFloat(item.price) || 0,
+      price: item.price || "",
       category: item.category,
       sellerName: item.seller,
       sellerLocation: item.location,
       sellerPhone: item.phone,
       imageUrl: getDirectGoogleDriveUrl(item.image),
-      images: splitUrls(item.images),
+      images: splitUrls(item.images).map(getDirectGoogleDriveUrl), // Menyesuaikan agar setiap URL dipecah dan diubah
       details: item.details,
-      rating: parseFloat(item.rating) || 0,
+      rating: item.rating || "",
       waLink: item.waLink?.trim() || "",
       instaLink: item.instaLink?.trim() || ""
     }))
 }
 
 export function transformRegulationData(data: RegulationData[]) {
-  return data
-    .filter(item => item.status === "Aktif")
-    .sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime())
-    .map(item => ({
-      id: item.id,
-      title: item.title,
-      description: item.description,
-      category: item.category,
-      fileUrl: item.file_url,
-      views: parseInt(item.views) || 0,
-      publishedAt: item.published_at
-    }))
+  return data.map(item => ({
+    id: item.id,
+    title: item.title,
+    description: item.description,
+    category: item.category,
+  }))
 }
 
 export function transformAchievementData(data: AchievementData[]) {
@@ -404,7 +386,6 @@ export function transformAchievementData(data: AchievementData[]) {
       year: item.year,
       category: item.category,
       description: item.description,
-      imageUrl: getDirectGoogleDriveUrl(item.image_url)
     }))
 }
 
@@ -433,7 +414,6 @@ export function transformFacilityData(data: FacilityData[]) {
 export function transformHistoryData(data: HistoryData[]) {
   return data
     .sort((a, b) => {
-      // Sort by year, handle ranges like "1900-1940"
       const yearA = a.year.split('-')[0]
       const yearB = b.year.split('-')[0]
       return parseInt(yearA) - parseInt(yearB)
@@ -462,7 +442,7 @@ export function splitUrls(input: string): string[] {
   if (!input) return [];
 
   return input
-    .split(';')                  // Split by semicolon
-    .map(url => url.trim())     // Trim whitespace if any
-    .filter(url => url.length); // Remove empty entries
+    .split(';')
+    .map(url => url.trim())
+    .filter(url => url.length);
 }

@@ -120,7 +120,7 @@ export default function FasilitasPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">Fasilitas Umum Dusun</h1>
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">Fasilitas Umum Dusun Pogung Lor</h1>
         <div className="w-24 h-1 bg-green-600 mx-auto mb-6"></div>
         <p className="text-gray-600 max-w-2xl mx-auto">
           Sarana dan prasarana yang kami sediakan untuk kenyamanan dan kemajuan bersama.
@@ -137,11 +137,12 @@ export default function FasilitasPage() {
               <div className="grid lg:grid-cols-2 gap-0">
                 {/* Image */}
                 <div className="relative">
-                  <img
-                    src={facility.imageUrl || "/placeholder.svg"}
-                    alt={facility.name}
-                    className="w-full h-64 lg:h-full object-cover"
-                  />
+                <iframe
+                src={facility.imageUrl.replace('/view?usp=sharing', '/preview') || "/placeholder.svg"}
+                title={facility.name}
+                allowFullScreen
+                className="w-full h-64 lg:h-full border-none object-cover"
+                 />
                   <div className="absolute top-4 left-4">
                     <div className={`w-12 h-12 ${colorClass} rounded-full flex items-center justify-center`}>
                       <IconComponent className="w-6 h-6" />

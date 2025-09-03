@@ -6,7 +6,8 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Calendar, User, ArrowRight } from "lucide-react"
 import Link from "next/link"
-import { fetchNewsData, transformNewsData } from "@/lib/google-sheets-multi"
+import { fetchNewsData, transformNewsData, getDirectGoogleDriveUrl } from "@/lib/google-sheets-multi"
+
 
 interface NewsItem {
   id: string
@@ -79,7 +80,7 @@ export default function BeritaPage() {
     return (
       <div className="container mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">Berita Desa</h1>
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">Berita Dusun Pogung Lor</h1>
           <div className="w-24 h-1 bg-green-600 mx-auto mb-6"></div>
           <p className="text-gray-600">Memuat berita...</p>
         </div>
@@ -95,22 +96,23 @@ export default function BeritaPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">Berita Desa</h1>
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">Berita Dusun Pogung Lor</h1>
         <div className="w-24 h-1 bg-green-600 mx-auto mb-6"></div>
-        <p className="text-gray-600">Informasi terkini dan berita penting dari Dusun Yogyakarta</p>
+        <p className="text-gray-600">Informasi terkini dan berita penting dari Dusun Pogung Lor</p>
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {news.map((item) => (
           <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-shadow group">
-            <div className="relative">
-              <img
-                src={item.image || "/placeholder.svg"}
-                alt={item.title}
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <Badge className="absolute top-3 right-3 bg-green-600">{item.category}</Badge>
-            </div>
+            <div className="relative aspect-video">
+              <iframe
+                src={getDirectGoogleDriveUrl(item.image) || "/placeholder.svg"}
+                title={item.title}
+                className="absolute top-0 left-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                frameBorder="0"
+              ></iframe>
+              <Badge className="absolute top-3 right-3 bg-green-600">{item.category}</Badge>
+            </div>
             <CardContent className="p-6">
               <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
                 <div className="flex items-center gap-1">

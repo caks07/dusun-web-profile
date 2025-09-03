@@ -43,7 +43,7 @@ export default function VillageGallery() {
     return (
       <section>
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">Galeri Foto Desa</h2>
+          <h2 className="text-3xl font-bold text-gray-800 mb-4">Galeri Foto Dusun Pogung Lor</h2>
           <div className="w-24 h-1 bg-green-600 mx-auto mb-6"></div>
           <p className="text-gray-600">Memuat galeri...</p>
         </div>
@@ -59,10 +59,10 @@ export default function VillageGallery() {
   return (
     <section>
       <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">Galeri Foto Desa</h2>
+        <h2 className="text-3xl font-bold text-gray-800 mb-4">Galeri Foto Dusun Pogung Lor</h2>
         <div className="w-24 h-1 bg-green-600 mx-auto mb-6"></div>
         <p className="text-gray-600">
-          Dokumentasi kegiatan dan keindahan desa yang menggambarkan kehidupan sehari-hari masyarakat.
+          Dokumentasi kegiatan dan keindahan dusun yang menggambarkan kehidupan sehari-hari masyarakat.
         </p>
       </div>
 

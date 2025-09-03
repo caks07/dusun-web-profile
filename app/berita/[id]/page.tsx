@@ -1,30 +1,84 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import { useParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ArrowLeft, Calendar, User, Share2, Facebook, MessageCircle, Copy } from "lucide-react"
 import Link from "next/link"
+import { fetchNewsData, transformNewsData, NewsData, getDirectGoogleDriveUrl } from "@/lib/google-sheets-multi"
 
-// This would typically fetch data based on the ID
-const newsData = {
-  id: "1",
-  title: "Pembangunan Jalan Desa Tahap II Dimulai",
-  author: "Admin Desa",
-  date: "2024-01-15",
-  category: "Pembangunan",
-  image: "/placeholder.svg?height=400&width=800",
-  content: `
-    <p>Pembangunan jalan desa tahap kedua telah resmi dimulai pada hari Senin, 15 Januari 2024. Proyek ini merupakan kelanjutan dari pembangunan jalan tahap pertama yang telah berhasil diselesaikan tahun lalu.</p>
-    
-    <p>Kepala Desa, Bapak Suharto, menyampaikan bahwa pembangunan jalan ini bertujuan untuk meningkatkan akses transportasi warga, terutama untuk mendukung aktivitas ekonomi dan pendidikan. "Dengan jalan yang baik, warga akan lebih mudah mengakses pasar, sekolah, dan fasilitas kesehatan," ujarnya.</p>
-    
-    <p>Proyek pembangunan jalan sepanjang 2,5 kilometer ini menggunakan dana dari APBD Kabupaten dan ADD (Alokasi Dana Desa). Total anggaran yang dialokasikan mencapai Rp 1,2 miliar dengan target penyelesaian dalam waktu 6 bulan.</p>
-    
-    <p>Kontraktor yang menangani proyek ini adalah PT. Karya Mandiri, sebuah perusahaan konstruksi yang telah berpengalaman dalam pembangunan infrastruktur desa. Mereka berkomitmen untuk menyelesaikan proyek tepat waktu dengan kualitas terbaik.</p>
-    
-    <p>Warga desa menyambut baik proyek ini dan berharap dapat segera merasakan manfaatnya. Beberapa warga bahkan secara sukarela membantu dalam proses pembebasan lahan dan koordinasi dengan tim konstruksi.</p>
-  `,
+interface TransformedNewsItem {
+  id: string
+  title: string
+  excerpt: string
+  content: string
+  author: string
+  category: string
+  imageUrl: string
+  views: number
+  publishedAt: string
 }
 
 export default function BeritaDetailPage() {
+  const params = useParams()
+  const id = params?.id as string
+
+  const [newsItem, setNewsItem] = useState<TransformedNewsItem | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!id) {
+      setLoading(false);
+      return;
+    }
+
+    const fetchAndSetNews = async () => {
+      try {
+        const rawData: NewsData[] = await fetchNewsData()
+        const transformedData = transformNewsData(rawData)
+        const foundItem = transformedData.find((item) => item.id === id)
+
+        if (!foundItem) {
+          throw new Error("Berita tidak ditemukan.")
+        }
+
+        setNewsItem(foundItem)
+      } catch (err: any) {
+        setError(err.message)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchAndSetNews()
+  }, [id])
+
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4 py-12">
+        <p className="text-center py-12">Memuat berita...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container mx-auto px-4 py-12">
+        <p className="text-center py-12 text-red-600">Error: {error}</p>
+      </div>
+    );
+  }
+
+  if (!newsItem) {
+    return (
+      <div className="container mx-auto px-4 py-12">
+        <p className="text-center py-12">Berita tidak ditemukan.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto px-4 py-12">
       {/* Back Button */}
@@ -40,34 +94,35 @@ export default function BeritaDetailPage() {
       <article className="max-w-4xl mx-auto">
         {/* Header */}
         <header className="mb-8">
-          <Badge className="mb-4 bg-green-600">{newsData.category}</Badge>
-          <h1 className="text-4xl font-bold text-gray-800 mb-6">{newsData.title}</h1>
+          <Badge className="mb-4 bg-green-600">{newsItem.category}</Badge>
+          <h1 className="text-4xl font-bold text-gray-800 mb-6">{newsItem.title}</h1>
           <div className="flex items-center gap-6 text-gray-600 mb-6">
             <div className="flex items-center gap-2">
               <Calendar className="w-5 h-5" />
-              <span>{new Date(newsData.date).toLocaleDateString("id-ID")}</span>
+              <span>{new Date(newsItem.publishedAt).toLocaleDateString("id-ID")}</span>
             </div>
             <div className="flex items-center gap-2">
               <User className="w-5 h-5" />
-              <span>{newsData.author}</span>
+              <span>{newsItem.author}</span>
             </div>
           </div>
         </header>
 
         {/* Featured Image */}
-        <div className="mb-8">
-          <img
-            src={newsData.image || "/placeholder.svg"}
-            alt={newsData.title}
-            className="w-full h-96 object-cover rounded-lg shadow-lg"
-          />
-        </div>
+        <div className="mb-8">
+          <iframe
+            src={getDirectGoogleDriveUrl(newsItem.imageUrl) || "/placeholder.svg"}
+            title={newsItem.title}
+            className="w-full h-96 object-cover rounded-lg shadow-lg"
+            frameBorder="0"
+          ></iframe>
+        </div>
 
         {/* Content */}
         <div className="prose prose-lg max-w-none mb-12">
           <div
-            className="text-gray-700 leading-relaxed space-y-6"
-            dangerouslySetInnerHTML={{ __html: newsData.content }}
+            className="text-gray-700 leading-relaxed space-y-6 break-words whitespace-pre-wrap"
+            dangerouslySetInnerHTML={{ __html: newsItem.content }}
           />
         </div>
 

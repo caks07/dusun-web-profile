@@ -13,7 +13,7 @@ export default function VillageHistory() {
         <CardTitle className="text-2xl">Sejarah Dusun</CardTitle>
       </CardHeader>
       <CardContent className="text-center">
-        <p className="text-gray-600 mb-6">Perjalanan panjang desa dari masa ke masa yang penuh makna.</p>
+        <p className="text-gray-600 mb-6">Perjalanan panjang Dusun Pogung Lor dari masa ke masa yang penuh makna.</p>
         <Link href="/profil/sejarah">
           <Button variant="outline" className="group bg-transparent">
             Baca Sejarah

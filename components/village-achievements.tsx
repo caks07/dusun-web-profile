@@ -107,13 +107,13 @@ export default function VillageAchievements() {
     return (
       <section>
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">Prestasi Desa</h2>
+          <h2 className="text-3xl font-bold text-gray-800 mb-4">Prestasi Dusun Pogung Lor</h2>
           <div className="w-24 h-1 bg-green-600 mx-auto mb-6"></div>
           <p className="text-gray-600">Memuat prestasi...</p>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="flex flex-wrap justify-center gap-8">
           {[...Array(3)].map((_, i) => (
-            <div key={i} className="h-64 bg-gray-100 animate-pulse rounded-lg" />
+            <div key={i} className="h-64 w-72 bg-gray-100 animate-pulse rounded-lg" />
           ))}
         </div>
       </section>
@@ -123,26 +123,30 @@ export default function VillageAchievements() {
   return (
     <section>
       <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">Prestasi Desa</h2>
+        <h2 className="text-3xl font-bold text-gray-800 mb-4">Prestasi Dusun Pogung Lor</h2>
         <div className="w-24 h-1 bg-green-600 mx-auto mb-6"></div>
         <p className="text-gray-600">
-          Berbagai pencapaian yang membanggakan hasil kerja keras dan kolaborasi seluruh warga desa.
+          Berbagai pencapaian yang membanggakan hasil kerja keras dan kolaborasi seluruh warga Dusun Pogung Lor.
         </p>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-8">
+      <div className="flex flex-wrap justify-center gap-8">
         {achievements.map((achievement, index) => {
           const IconComponent = getIconForCategory(achievement.category)
           const colorClass = getColorForCategory(achievement.category)
           return (
-            <Card key={achievement.id || index} className="hover:shadow-lg transition-shadow">
+            <Card
+              key={achievement.id || index}
+              className="hover:shadow-lg transition-shadow w-110 flex flex-col"
+            >
               <CardHeader className="text-center">
                 <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <IconComponent className={`w-8 h-8 ${colorClass}`} />
+                   <IconComponent className={`w-8 h-8 ${colorClass}`} />
                 </div>
-                <Badge variant="secondary" className="mb-2">
-                  {achievement.year}
-                </Badge>
+              {/* Tahun di tengah */}
+                <div className="flex justify-center mb-2">
+                    <Badge variant="secondary">{achievement.year}</Badge>
+                </div>
                 <CardTitle className="text-lg">{achievement.title}</CardTitle>
               </CardHeader>
               <CardContent className="text-center">

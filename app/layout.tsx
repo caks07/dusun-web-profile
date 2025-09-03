@@ -8,9 +8,9 @@ import Footer from "@/components/footer"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Dusun Yogyakarta - Website Resmi",
+  title: "Pogung Lor - Website Resmi",
   description:
-    "Website resmi Dusun Yogyakarta dengan informasi lengkap tentang profil desa, berita, UMKM, dan peraturan desa.",
+    "Website resmi Dusun Pogung Lor dengan informasi lengkap tentang profil desa, berita, UMKM, dan peraturan desa.",
     generator: 'v0.dev'
 }
 

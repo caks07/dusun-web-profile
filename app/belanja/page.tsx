@@ -11,7 +11,7 @@ interface Product {
   id: string
   name: string
   description: string
-  price: number
+  price: string
   category: string
   sellerName: string
   sellerLocation: string
@@ -19,7 +19,7 @@ interface Product {
   imageUrl: string
   images: string[]
   details: string
-  rating: number
+  rating: string
 }
 
 export default function BelanjaPage() {
@@ -61,7 +61,7 @@ export default function BelanjaPage() {
             id: "1",
             name: "Keripik Singkong Original",
             description: "Keripik singkong resep keluarga, gurih dan renyah.",
-            price: 15000,
+            price: "15000",
             category: "Snack",
             sellerName: "Keripik Bu Sari",
             sellerLocation: "RT 02/RW 01",
@@ -69,13 +69,13 @@ export default function BelanjaPage() {
             imageUrl: "/placeholder.svg?height=200&width=300",
             images: ["/placeholder.svg?height=200&width=300"],
             details: "Berat 250 gram",
-            rating: 4.8,
+            rating: "4.9",
           },
           {
             id: "2",
             name: "Batik Tulis Motif Jogja",
             description: "Batik tulis asli Jogja dengan motif klasik.",
-            price: 250000,
+            price: "250000",
             category: "Clothing",
             sellerName: "Batik Pak Joko",
             sellerLocation: "RT 03/RW 02",
@@ -83,7 +83,7 @@ export default function BelanjaPage() {
             imageUrl: "/placeholder.svg?height=200&width=300",
             images: ["/placeholder.svg?height=200&width=300"],
             details: "Bahan Katun",
-            rating: 4.9,
+            rating: "4.9",
           },
         ]
         setProducts(placeholderProducts)
@@ -99,7 +99,7 @@ export default function BelanjaPage() {
     return (
       <div className="container mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">Belanja UMKM Desa</h1>
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">Belanja UMKM Dusun Pogung Lor</h1>
           <div className="w-24 h-1 bg-green-600 mx-auto mb-6"></div>
           <p className="text-gray-600">Memuat produk...</p>
         </div>
@@ -115,10 +115,10 @@ export default function BelanjaPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">Belanja UMKM Desa</h1>
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">Belanja UMKM Dusun Pogung Lor</h1>
         <div className="w-24 h-1 bg-green-600 mx-auto mb-6"></div>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Dukung ekonomi lokal dengan berbelanja produk berkualitas dari UMKM Dusun Yogyakarta
+          Dukung ekonomi lokal dengan berbelanja produk berkualitas dari UMKM Dusun Pogung Lor
         </p>
       </div>
 
@@ -131,7 +131,7 @@ export default function BelanjaPage() {
         </div>
         <div className="text-center p-6 bg-blue-50 rounded-lg">
           <Star className="w-12 h-12 text-blue-600 mx-auto mb-3" />
-          <div className="text-2xl font-bold text-blue-600 mb-1">4.7</div>
+          <div className="text-2xl font-bold text-blue-600 mb-1">4.8</div>
           <div className="text-gray-600">Rating Rata-rata</div>
         </div>
         <div className="text-center p-6 bg-purple-50 rounded-lg">
@@ -161,7 +161,7 @@ export default function BelanjaPage() {
               <p className="text-gray-600 text-sm mb-1">{product.sellerName}</p>
               <p className="text-gray-500 text-xs mb-3">{product.sellerLocation}</p>
               <div className="flex items-center justify-between">
-                <div className="text-xl font-bold text-green-600">Rp {product.price.toLocaleString("id-ID")}</div>
+                <div className="text-xl font-bold text-green-600">Rp {product.price}</div>
                 <Link href={`/belanja/${product.id}`}>
                   <Button size="sm" className="group/btn">
                     Lihat Detail
@@ -179,7 +179,15 @@ export default function BelanjaPage() {
         <TrendingUp className="w-16 h-16 text-green-600 mx-auto mb-4" />
         <h2 className="text-2xl font-bold text-gray-800 mb-4">Ingin Bergabung Sebagai Penjual?</h2>
         <p className="text-gray-600 mb-6">Daftarkan UMKM Anda dan jangkau lebih banyak pelanggan</p>
-        <Button className="bg-green-600 hover:bg-green-700">Hubungi Admin</Button>
+        <Button asChild className="bg-green-600 hover:bg-green-700">
+          <a
+            href="https://wa.me/+6282227676377"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+          Hubungi Admin
+          </a>
+        </Button>
       </div>
     </div>
   )

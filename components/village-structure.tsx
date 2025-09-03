@@ -13,7 +13,7 @@ export default function VillageStructure() {
         <CardTitle className="text-2xl">Struktur Dusun</CardTitle>
       </CardHeader>
       <CardContent className="text-center">
-        <p className="text-gray-600 mb-6">Organisasi pemerintahan desa yang terstruktur dan profesional.</p>
+        <p className="text-gray-600 mb-6">Organisasi pemerintahan Dusun Pogung Lor yang terstruktur dan profesional.</p>
         <Link href="/profil/struktur">
           <Button variant="outline" className="group bg-transparent">
             Lihat Struktur

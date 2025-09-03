@@ -10,37 +10,34 @@ interface Regulation {
   title: string
   description: string
   category: string
-  fileUrl: string
-  views: number
-  publishedAt: string
 }
 
 // Icon mapping berdasarkan kategori
 const getIconForCategory = (category: string) => {
   switch (category.toLowerCase()) {
-    case 'lingkungan':
+    case "lingkungan":
       return AlertTriangle
-    case 'keamanan':
+    case "keamanan":
       return Users
-    case 'pembangunan':
+    case "pembangunan":
       return Home
-    case 'peternakan':
+    case "peternakan":
       return Cow
     default:
-      return AlertTriangle
+      return FileText
   }
 }
 
 // Color mapping berdasarkan kategori
 const getColorForCategory = (category: string) => {
   switch (category.toLowerCase()) {
-    case 'lingkungan':
+    case "lingkungan":
       return "text-red-600 bg-red-100"
-    case 'keamanan':
+    case "keamanan":
       return "text-blue-600 bg-blue-100"
-    case 'pembangunan':
+    case "pembangunan":
       return "text-green-600 bg-green-100"
-    case 'peternakan':
+    case "peternakan":
       return "text-orange-600 bg-orange-100"
     default:
       return "text-gray-600 bg-gray-100"
@@ -54,34 +51,28 @@ export default function PeraturanPage() {
   useEffect(() => {
     const fetchRegulations = async () => {
       try {
-        // Fetch data from Google Sheets
         const regulationData = await fetchRegulationData()
         const transformedData = transformRegulationData(regulationData)
-
         setRegulations(transformedData)
         setLoading(false)
       } catch (error) {
         console.error("Error fetching regulations from Google Sheets:", error)
 
-        // Fallback to placeholder data
+        // fallback dummy data
         const placeholderRegulations: Regulation[] = [
           {
             id: "1",
-            title: "Larangan Membuang Sampah Sembarangan",
-            description: "Setiap warga dilarang keras membuang sampah di sungai, selokan, jalan, atau area publik lainnya. Sampah harus dikelola di tempat pembuangan sampah yang telah disediakan di masing-masing RT. Pelanggaran akan dikenakan sanksi sosial berupa kerja bakti membersihkan area desa selama 1 hari.",
+            title: "Penghuni Sewa Di Pogung Lor",
+            description:
+              "Wajib menyerahkan foto copy KTP (identitas pribadi) & nomor handphone kepada pemilik rumah sewa pada saat pertama kali menghuni rumah sewa.",
             category: "Lingkungan",
-            fileUrl: "",
-            views: 0,
-            publishedAt: "2024-01-01"
           },
           {
             id: "2",
             title: "Wajib Lapor Tamu 1x24 Jam",
-            description: "Setiap warga yang menerima tamu yang menginap lebih dari 1x24 jam wajib melaporkan identitas tamu tersebut kepada Ketua RT setempat. Hal ini bertujuan untuk menjaga keamanan dan ketertiban bersama.",
+            description:
+              "Setiap warga yang menerima tamu yang menginap lebih dari 1x24 jam wajib melaporkan identitas tamu tersebut kepada Ketua RT setempat.",
             category: "Keamanan",
-            fileUrl: "",
-            views: 0,
-            publishedAt: "2024-01-01"
           },
         ]
         setRegulations(placeholderRegulations)
@@ -96,7 +87,7 @@ export default function PeraturanPage() {
     return (
       <div className="container mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">Peraturan Desa</h1>
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">Peraturan Dusun Pogung Lor</h1>
           <div className="w-24 h-1 bg-green-600 mx-auto mb-6"></div>
           <p className="text-gray-600">Memuat peraturan...</p>
         </div>
@@ -112,7 +103,7 @@ export default function PeraturanPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">Peraturan Desa</h1>
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">Peraturan Dusun Pogung Lor</h1>
         <div className="w-24 h-1 bg-green-600 mx-auto mb-6"></div>
         <p className="text-gray-600 max-w-2xl mx-auto">
           Tata tertib yang disepakati bersama demi mewujudkan lingkungan yang aman, bersih, dan harmonis.
@@ -120,7 +111,7 @@ export default function PeraturanPage() {
       </div>
 
       <div className="space-y-8 mb-12">
-        {regulations.map((regulation, index) => {
+        {regulations.map((regulation) => {
           const IconComponent = getIconForCategory(regulation.category)
           const colorClass = getColorForCategory(regulation.category)
 
@@ -133,9 +124,7 @@ export default function PeraturanPage() {
                   >
                     <IconComponent className="w-6 h-6" />
                   </div>
-                  <div>
-                    <h2 className="text-xl font-bold text-gray-800">{regulation.title}</h2>
-                  </div>
+                  <h2 className="text-xl font-bold text-gray-800">{regulation.title}</h2>
                 </CardTitle>
               </CardHeader>
               <CardContent className="pl-20">
@@ -155,10 +144,12 @@ export default function PeraturanPage() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-gray-600 leading-relaxed">
-            Semua peraturan ini disusun berdasarkan Musyawarah Desa tanggal 1 Januari 2024 dan disetujui oleh seluruh
-            perwakilan warga. Mari kita patuhi bersama untuk kemajuan Dusun Yogyakarta.
-          </p>
+        <p className="text-gray-600 leading-relaxed mb-4">
+          Peraturan ini disusun, disepakati, dan ditandatangani melalui musyawarah warga sebagai dasar hukum pelaksanaan. Kesepakatan ini ditandatangani oleh Kepala Dukuh Pogung Lor Nurbatin Kuncoro, Ketua LPMD H. Bijidadi, Bhabinkamtibmas Sinduadi 1 A. Heru Sutanto, serta Babinsa Sinduadi 1 Sutrisno di Pogung Lor pada 1 April 2018.
+        </p>
+        <p className="text-gray-600 leading-relaxed">
+          Mari kita patuhi peraturan ini bersama-sama demi mewujudkan ketertiban, keamanan, dan keharmonisan di lingkungan Dusun Pogung Lor.
+        </p>
         </CardContent>
       </Card>
     </div>

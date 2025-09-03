@@ -12,8 +12,6 @@ interface Achievement {
   year: string
   category: string
   description: string
-  details: string
-  imageUrl: string
 }
 
 // Icon mapping berdasarkan kategori
@@ -74,8 +72,6 @@ export default function PrestasiPage() {
           year: item.year,
           category: item.category,
           description: item.description,
-          details: item.description, // Using description as details for now
-          imageUrl: item.imageUrl || "/placeholder.svg?height=300&width=400"
         }))
 
         setAchievements(achievementsData)
@@ -90,18 +86,14 @@ export default function PrestasiPage() {
             title: "Desa Sadar Wisata",
             year: "2023",
             category: "Pariwisata",
-            description: "Penghargaan dari Dinas Pariwisata Provinsi atas keberhasilan mengembangkan potensi wisata lokal.",
-            details: "Program pengembangan wisata berbasis masyarakat yang melibatkan seluruh warga dalam melestarikan budaya dan alam. Desa berhasil menciptakan paket wisata edukasi pertanian dan budaya tradisional.",
-            imageUrl: "/placeholder.svg?height=300&width=400"
+            description: "Penghargaan dari Dinas Pariwisata Provinsi atas keberhasilan mengembangkan potensi wisata lokal."
           },
           {
             id: "2",
             title: "Juara 1 Lomba Kebersihan Tingkat Kabupaten",
             year: "2023",
             category: "Lingkungan",
-            description: "Komitmen tinggi warga dalam menjaga kebersihan lingkungan membuahkan hasil terbaik.",
-            details: "Implementasi program 3R (Reduce, Reuse, Recycle) dan bank sampah yang dikelola secara mandiri oleh warga. Tingkat kebersihan lingkungan mencapai 95% dengan partisipasi aktif seluruh RT/RW.",
-            imageUrl: "/placeholder.svg?height=300&width=400"
+            description: "Komitmen tinggi warga dalam menjaga kebersihan lingkungan membuahkan hasil terbaik."
           },
         ]
         setAchievements(placeholderAchievements)
@@ -169,11 +161,6 @@ export default function PrestasiPage() {
               <div className={`grid lg:grid-cols-2 gap-0 ${index % 2 === 1 ? "lg:grid-flow-col-dense" : ""}`}>
                 {/* Image */}
                 <div className={`relative ${index % 2 === 1 ? "lg:col-start-2" : ""}`}>
-                  <img
-                    src={achievement.imageUrl || "/placeholder.svg"}
-                    alt={achievement.title}
-                    className="w-full h-64 lg:h-full object-cover"
-                  />
                   <div className="absolute top-4 left-4">
                     <div className={`w-12 h-12 ${colorClass} rounded-full flex items-center justify-center`}>
                       <IconComponent className="w-6 h-6" />
@@ -199,7 +186,6 @@ export default function PrestasiPage() {
                   <CardContent className="p-0">
                     <div className="bg-gray-50 rounded-lg p-4">
                       <h4 className="font-semibold text-gray-800 mb-2">Detail Prestasi:</h4>
-                      <p className="text-gray-600 text-sm leading-relaxed">{achievement.details}</p>
                     </div>
                   </CardContent>
                 </div>

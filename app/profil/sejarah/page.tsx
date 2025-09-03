@@ -95,7 +95,7 @@ export default function SejarahPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">Sejarah Dusun Yogyakarta</h1>
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">Sejarah Dusun Pogung Lor</h1>
         <div className="w-24 h-1 bg-green-600 mx-auto mb-6"></div>
         <p className="text-gray-600 max-w-2xl mx-auto">
           Menelusuri jejak waktu dan peristiwa yang membentuk dusun kita tercinta.
@@ -106,13 +106,13 @@ export default function SejarahPage() {
       <div className="mb-16">
         <div className="relative h-64 md:h-96 rounded-lg overflow-hidden shadow-lg">
           <img
-            src="https://i.pinimg.com/originals/6e/82/c4/6e82c4705f9a2554c3f087a300361062.jpg"
+            src="https://i.pinimg.com/736x/53/60/f5/5360f532c3cc62ae6eb752c0161af0ba.jpg"
             alt="Ilustrasi desa zaman dulu"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black opacity-40 flex items-center justify-center">
             <div className="text-center text-white">
-              <h2 className="text-2xl md:text-4xl font-bold mb-2">Ilustrasi desa zaman dulu</h2>
+              <h2 className="text-2xl md:text-4xl font-bold mb-2">Sejarah Dusun Pogung Lor</h2>
               <p className="text-lg">Perjalanan sejarah yang penuh makna</p>
             </div>
           </div>
@@ -127,13 +127,16 @@ export default function SejarahPage() {
           </CardHeader>
           <CardContent className="p-8">
             <p className="text-gray-600 leading-relaxed mb-6">
-              Cerita Dusun Yogyakarta berawal dari visi para pendirinya di pertengahan abad ke-19. Mereka adalah petani
-              tangguh yang melihat potensi luar biasa di tanah ini. Dengan semangat gotong royong, mereka membuka lahan,
-              membangun pemukiman, dan menata sistem irigasi sederhana yang menjadi cikal bakal kemakmuran dusun.
-            </p>
-            <p className="text-gray-600 leading-relaxed">
-              Nama "Yogyakarta" bukan sekadar nama, melainkan doa dan cita-cita: sebuah tempat yang layak untuk hidup
-              sejahtera dan damai. Nilai-nilai ini terus dipegang teguh oleh generasi penerus hingga hari ini.
+            Menurut legenda yang beredar di masyarakat, Pogung bermula dari hutan lebat di daerah yang kini menjadi Kota Yogyakarta. Seorang tokoh bernama Ki Dalang, yang ditugaskan menemani Putri Campa dalam pelarian dari kerajaan selatan, kemudian mendirikan sebuah desa sebagai tempat mereka berteduh. Pembangunan desa itu dilakukan dengan penuh semangat, diiringi tabuhan gamelan dengan bunyi “Pong… Gung…” selama sekitar 40 hari, sehingga desa tersebut dinamai Pogung.
+</p>
+<p className="text-gray-600 leading-relaxed mb-6">
+Versi cerita rakyat lain menyebut bahwa wilayah Pogung pada mulanya dikenal sebagai kebun ketela. Nama “Pogung” diperkirakan berasal dari istilah “pohung” (ketela) yang masuk melalui bahasa Belanda, lalu diserap dalam bahasa Jawa menjadi “Pogung”. Dengan demikian, ada dua versi asal-usul nama Pogung yang sama-sama hidup dalam tradisi lisan masyarakat.
+</p>
+<p className="text-gray-600 leading-relaxed mb-6">
+Setelah desa berdiri, Ki Dalang membagi wilayah menjadi empat dusun: Pogung Dalangan (tempat tinggal Ki Dalang), Pogung Rejo (area subur), Pogung Kidul (selatan), dan Pogung Lor (utara). Penambahan kata “Lor” sendiri merujuk pada arah utara dalam bahasa Jawa. Dalam tradisi lokal, juga diceritakan bahwa pada hari ketujuh setelah pembangunan, Raja dan Putri Campa muncul secara gaib dan memberikan ramalan bahwa wilayah ini kelak akan menjadi pusat pendidikan dan ilmu pengetahuan, bahkan menarik orang-orang dari luar negeri.
+</p>
+<p className="text-gray-600 leading-relaxed mb-6">
+Kini, Pogung Lor telah tumbuh menjadi kawasan yang semarak, terutama karena lokasinya berdekatan dengan Universitas Gadjah Mada. Meski demikian, ia juga dikenal sebagai “labirin” Yogyakarta, sebab banyaknya gang sempit dan portal malam hari membuat pendatang sering tersesat di dalamnya.
             </p>
           </CardContent>
         </Card>
@@ -142,7 +145,7 @@ export default function SejarahPage() {
       {/* Timeline */}
       <section>
         <div className="text-center mb-12">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Linimasa Perjalanan Dusun</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Aspek Sejarah Pogung Lor</h2>
           <div className="w-16 h-1 bg-green-600 mx-auto"></div>
         </div>
 
@@ -167,7 +170,7 @@ export default function SejarahPage() {
 
                   {/* Content */}
                   <div className={`w-full md:w-1/2 ${index % 2 === 0 ? "md:pr-8" : "md:pl-8"}`}>
-                    <Card className="ml-12 md:ml-0 hover:shadow-lg transition-shadow">
+                    <Card className="ml-12 md:ml-0 hover:shadow-lg transition-shadow ">
                       <CardHeader>
                         <div className="flex items-center gap-3 mb-2">
                           <div className={`w-10 h-10 ${colorClass} rounded-full flex items-center justify-center`}>
@@ -177,10 +180,10 @@ export default function SejarahPage() {
                             {event.year}
                           </Badge>
                         </div>
-                        <CardTitle className="text-xl font-bold text-gray-800">{event.title}</CardTitle>
+                        <CardTitle className="text-xl font-bold text-gray-800 break-words whitespace-pre-wrap">{event.title}</CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-gray-600 leading-relaxed">{event.description}</p>
+                        <p className="text-gray-600 leading-relaxed break-words whitespace-pre-wrap">{event.description}</p>
                       </CardContent>
                     </Card>
                   </div>

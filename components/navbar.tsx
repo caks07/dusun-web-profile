@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "Profil Desa", href: "/profil" },
+  { name: "Profil Dusun", href: "/profil" },
   { name: "Berita", href: "/berita" },
   { name: "Belanja", href: "/belanja" },
   { name: "Peraturan", href: "/peraturan" },
@@ -25,10 +25,10 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-gradient-to-br from-green-600 to-green-700 rounded-full flex items-center justify-center shadow-lg">
-              <span className="text-white font-bold text-lg">D</span>
+              <span className="text-white font-bold text-lg">P</span>
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-xl text-gray-800">Dusun Yogyakarta</span>
+              <span className="font-bold text-xl text-gray-800">Pogung Lor</span>
               <span className="text-xs text-gray-500">Website Resmi</span>
             </div>
           </Link>
